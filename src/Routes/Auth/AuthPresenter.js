@@ -80,6 +80,8 @@ export default ({
           </form>
         )}
       </Form>
+      
+      {action !== "confirm" && (
       <StateChanger>
         {action === "logIn" ? (
           <>
@@ -87,11 +89,12 @@ export default ({
             <Link onClick={() => setAction("signUp")}>Sign up</Link>
           </>
         ) : (
-            <>
-              Have an account?{" "}
-              <Link onClick={() => setAction("logIn")}>Log in</Link>
-            </>
-          )}
+          <>
+            Have an account?{" "}
+            <Link onClick={() => setAction("logIn")}>Log in</Link>
+          </>
+        )}
       </StateChanger>
+    )}
     </Wrapper>
   );
