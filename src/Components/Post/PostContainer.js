@@ -1,33 +1,20 @@
-# Post Component
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import useInput from "../../Hooks/useInput";
+import PostPresenter from "./PostPresenter";
 
-Post 폴더를 만든 후 index.js, PostContainer.js, PostPresenter.js 파일을 만들어 준다.
+const PostContainer = ({
+  id,
+  user,
+  files,
+  likeCount,
+  isLiked,
+  comments,
+  createdAt
+}) => {
+  return <PostPresenter />;
+};
 
-Feed.js에 포스트에 필요한 요소들을 추가해 준다 아래와 같이
-~~~javascript
-return (
-  <Wrapper>
-    {loading && <Loader />}
-    {!loading &&
-      data &&
-      data.seeFeed &&
-      data.seeFeed.map(post => (
-        <Post
-          key={post.id}
-          id={post.id}
-          user={post.user}
-          files={post.files}
-          likeCount={post.likeCount}
-          isLiked={post.isLiked}
-          comments={post.comments}
-          createdAt={post.createdAt}
-        />
-      ))}
-  </Wrapper>
-);
-~~~
-
-PostContainer에서는 각각 인자들을 유의하여 추가한다
-~~~javascript
 PostContainer.propTypes = {
   id: PropTypes.string.isRequired,
   user: PropTypes.shape({
@@ -55,4 +42,5 @@ PostContainer.propTypes = {
   ).isRequired,
   createdAt: PropTypes.string
 };
-~~~
+
+export default PostContainer;
