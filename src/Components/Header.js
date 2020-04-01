@@ -72,45 +72,49 @@ const ME = gql`
 `;
 
 export default withRouter(({ history }) => {
-    const search = useInput("");
-    const { data, loading } = useQuery(ME);
-    if (loading) return"";
-    const onSearchSubmit = e => {
-        e.preventDefault();
-        history.push(`/search?term=${search.value}`);
-    };
-    return (
-        <Header>
-            <HeaderWrapper>
-                <HeaderColumn>
-                    <Link to="/">
-                        <Logo />
-                    </Link>
-                </HeaderColumn>
-                <HeaderColumn>
-                    <form onSubmit={onSearchSubmit}>
-                        <SearchInput {...search} placeholder="Search" />
-                    </form>
-                </HeaderColumn>
-                <HeaderColumn>
-                    <HeaderLink to="/explore">
-                        <Compass />
-                    </HeaderLink>
-                    <HeaderLink to="/notifications">
-                        <HeartEmpty />
-                    </HeaderLink>
-                    {!data.me ? (
-                        <HeaderLink to="/#">
-                            <User />
-                        </HeaderLink>
-                    ) : (
-                            <HeaderLink to={data.me.username}>
-                                <User />
-                            </HeaderLink>
-                        )}
+  const search = useInput("");
+  const { data, loading } = useQuery(ME);
+  if (loading) return "";
+  const onSearchSubmit = e => {
+    e.preventDefault();
+    history.push(`/search?term=${search.value}`);
+  };
+  return (
+    <Header>
+      <HeaderWrapper>
+        <HeaderColumn>
+          <Link to="/">
+            <Logo />
+          </Link>
+        </HeaderColumn>
+        <HeaderColumn>
+          <form onSubmit={onSearchSubmit}>
+            <SearchInput
+              value={search.value}
+              onChange={search.onChange}
+              placeholder="Search"
+            />
+          </form>
+        </HeaderColumn>
+        <HeaderColumn>
+          <HeaderLink to="/explore">
+            <Compass />
+          </HeaderLink>
+          <HeaderLink to="/notifications">
+            <HeartEmpty />
+          </HeaderLink>
+          {!data.me ? (
+            <HeaderLink to="/#">
+              <User />
+            </HeaderLink>
+          ) : (
+              <HeaderLink to={data.me.username}>
+                <User />
+              </HeaderLink>
+            )}
 
-                </HeaderColumn>
-            </HeaderWrapper>
-        </Header>
-    );
+        </HeaderColumn>
+      </HeaderWrapper>
+    </Header>
+  );
 })
